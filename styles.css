@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+hr {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.page {
+  margin: 50px;
+}
+
+.recipes {
+  display: flex;
+}
+
+.recipe {
+  border-radius: 5px;
+  border-color: black;
+  border: 1px solid;
+  padding: 10px;
+  width: 30%;
+
+  p {
+    font-size: 24px;
+    padding-bottom: 15px;
+  }
+}
+
+ul.ingredients-list {
+  list-style: none;
+}
