@@ -5,6 +5,7 @@
 }
 
 body {
+  font-size: 14px;
   font-family: system-ui, sans-serif;
 }
 
@@ -13,27 +14,86 @@ hr {
   margin-bottom: 20px;
 }
 
-.page {
+.container {
   margin: 50px;
 }
 
 .recipes {
-  display: flex;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .recipe {
+  grid-row-start: 1;
   border-radius: 5px;
-  border-color: black;
-  border: 1px solid;
-  padding: 10px;
-  width: 30%;
+  border: 1px solid black;
+  padding: 15px;
 
   p {
-    font-size: 24px;
+    font-size: 21px;
     padding-bottom: 15px;
   }
 }
 
-ul.ingredients-list {
+.collapsible {
+  grid-row-end: 3;
+}
+
+ul {
   list-style: none;
+}
+
+li {
+  line-height: 1.8;
+}
+
+li span {
+  border: 1px solid black;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 5px;
+  opacity: 50%;
+  padding: 5px;
+}
+
+.ingredients-collapsible label {
+  display: flex;
+  justify-content: center;
+}
+
+#list-toggle {
+  opacity: 0;
+  position: absolute;
+}
+
+.show-less,
+.show-more {
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+}
+
+.show-less {
+  display: none;
+}
+
+/* When the checkbox is checked, show all items */
+#list-toggle:checked ~ .ingredients-collapsible > li {
+  display: list-item;
+}
+
+#list-toggle:checked ~ .collapsible {
+}
+
+#list-toggle:checked ~ label .show-less {
+  display: flex;
+}
+
+#list-toggle:checked ~ label .show-more {
+  display: none;
+}
+
+.ingredients-collapsible li:nth-child(n + 11) {
+  display: none;
 }
