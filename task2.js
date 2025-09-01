@@ -1,5 +1,5 @@
 /* JavaScript optimization
-string - your name
+string - your name, unsortedNames
 int - number of judges
 string - names of four other people separated by spaces
 
@@ -19,26 +19,55 @@ Each batch takes 30 minutes, so multiply by 30 to get the finish time
 150
 */
 
-//takes inputs name(string) and names(unsorted array)
-//push name into array, use sort()
+//use js sort()
 const alphabetize1 = (name, unsortedNames) => {
   unsortedNames.push(name);
   return unsortedNames.sort();
 };
 
-//takes input names(unsorted array)
 //use quick sort
-const alphabetize2 = () => {};
+const alphabetize2 = (name, unsortedNames) => {
+  function partition(names, start, end) {
+    // For random pivot use => names[Math.floor(Math.random() * (end - start + 1) + start)];
+    // middle pivot
+    const pivotVal = names[Math.floor((start + end) / 2)];
+
+    while (start <= end) {
+      while (names[start] < pivotVal) {
+        start++;
+      }
+      while (names[end] > pivotVal) {
+        end--;
+      }
+      if (start <= end) {
+        // swap
+        let temp = names[start];
+        names[start] = names[end];
+        names[end] = temp;
+        start++;
+        end--;
+      }
+    }
+    return start;
+  }
+
+  function quickSort(names, startIndex = 0, endIndex = names.length - 1) {
+    if (startIndex >= endIndex) return names;
+    const index = partition(names, startIndex, endIndex);
+    quickSort(names, startIndex, index - 1);
+    quickSort(names, index, endIndex);
+
+    return names;
+  }
+
+  unsortedNames.push(name);
+  return quickSort(unsortedNames);
+};
 
 console.time("alphabetize1");
-console.log(
-  alphabetize1("Sophia", ["Manon", "Daniela", "Megan", "Lara", "Yoonchae"])
-);
+alphabetize1("Sophia", ["Manon", "Daniela", "Megan", "Lara", "Yoonchae"]);
 console.timeEnd("alphabetize1");
-console.log("-----------------------------");
 
 console.time("alphabetize2");
-console.log(
-  alphabetize2("Sophia", ["Manon", "Daniela", "Megan", "Lara", "Yoonchae"])
-);
+alphabetize2("Sophia", ["Manon", "Daniela", "Megan", "Lara", "Yoonchae"]);
 console.timeEnd("alphabetize2");
